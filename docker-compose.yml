@@ -1,0 +1,15 @@
+mariadb:
+  image: mariadb:10.0.33
+  container_name: "v2-mariadb"
+  restart: "no"
+  environment:
+    - MYSQL_ROOT_PASSWORD=rootPass!23_dEr34
+  ports:
+    - 3306:3306
+  volumes:
+    - ./dbdata:/var/lib/mysql #DB data should be persistent. Mount container dir to host dir
+    - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d #initial setup scripts
+  log_driver: "json-file"
+  log_opt:
+    max-size: "5m"
+    max-file: "10"
